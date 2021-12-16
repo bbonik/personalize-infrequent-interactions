@@ -1,8 +1,8 @@
 # personalize-infrequent-interactions
 This notebook shows how to use **Amazon Personalize** with datasets of infrequent interactions. It particularly shows how to use a combination of **SIMS+Personalize Ranking recipes**, in order to recommend new items to users, which can give better results when the user interactions with items are infrequent. 
 
-The following figure describes the approach:
 ![example](static/example.png "example")
+
 
 The notebooks includes the following sections:
 1. Generating a synthetic infrequent interactions dataset
@@ -11,6 +11,7 @@ The notebooks includes the following sections:
 4. Creating a **function that combines SIMS + Personalized Ranking recipes**, in order to recommend items to users.
 5. Comparing and evaluating SIMS + Personalized Ranking vs the User Personalization recipe.
 6. Cleaning up resources. 
+
 
 The notebook makes use of 2 helper Python (3.8) scripts, located in the ```utils``` folder.
 - ```dataset_generator.py```: This script generates a random synthetic dataset of infrequent interactions.
