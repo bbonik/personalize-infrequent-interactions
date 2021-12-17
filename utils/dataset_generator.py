@@ -1,4 +1,4 @@
-from scipy.stats import gamma
+from scipy.stats import invgamma
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -54,7 +54,7 @@ def generate_ii_dataset(
         
     max_item_digits = len(str(number_of_items))
     max_user_digits = len(str(number_of_users)) - 1
-    ALPHA = 2  # this parameter defines the skewness of the sampling distribution
+    ALPHA = 1  # this parameter defines the skewness of the sampling distribution
     
     # starting and ending range timestamps
     timestamp_range_begin = int(
@@ -80,7 +80,7 @@ def generate_ii_dataset(
         
     # define sampling distribution for interactions
     alpha = ALPHA  # this parameter defines the skewness of the sampling distribution
-    x = np.linspace(gamma.ppf(0.01, alpha), gamma.ppf(0.99, alpha), 100)
+    x = np.linspace(invgamma.ppf(0.01, alpha), invgamma.ppf(0.99, alpha), 100)
     
     
     # defining the popularity distribution of items (popular vs other items)
@@ -105,7 +105,7 @@ def generate_ii_dataset(
     for user in range(number_of_users):
         # randomly sampling how many interactions the user had (from the gamma distribution)
         number_of_interactions = np.round(
-            gamma.rvs(
+            invgamma.rvs(
                 a=alpha, 
                 size=1)
         ).astype(int)[0]
@@ -162,7 +162,7 @@ def generate_ii_dataset(
         
         # plot the sampling distribution 
         plt.subplot(grid[0,0])
-        plt.plot(x, gamma.pdf(x, alpha), label='gamma pdf')
+        plt.plot(x, invgamma.pdf(x, alpha), label='invgamma pdf')
         plt.legend()
         plt.xlabel('Number of interactions')
         plt.title('Distribution used to sample user interactions')
